@@ -7,7 +7,7 @@
                  start-page="Overview.md">
 
     <toc-element topic="Overview.md"/>
+    <toc-element topic="Tutorial.md"/>
     <toc-element topic="CLI-Reference.md"/>
-    <toc-element topic="Running-the-risk-model-tool.md"/>
     <toc-element topic="toml-reference.md"/>
 </instance-profile>

@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>Overview.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #c77dbb; font-style: italic;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Overview.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">Overview</span>
+
+<span class="s0">### </span><span class="s2">Inputs</span>
+<span class="s2">At a high-level, a risk model needs a few key inputs that the customer provides</span><span class="s1">:</span>
+
+<span class="s0">#### </span><span class="s2">Factor dataframe</span>
+<span class="s2">The factor dataframe contains the all the factor and universe data necessary to run the model. Specifically, it contains the following columns</span><span class="s1">:</span>
+  <span class="s0">- </span><span class="s2">Style factor columns</span>
+  <span class="s0">- </span><span class="s2">Industry factor columns</span>
+  <span class="s0">- </span><span class="s2">Estimation universe column</span>
+    <span class="s0">- </span><span class="s2">This consists of either booleans or 0/1 numerical values, each one indicating whether or not that asset should be included in the estimation universe</span>
+  <span class="s0">- </span><span class="s2">Asset ID column</span>
+  <span class="s0">- </span><span class="s2">Date column</span>
+
+<span class="s2">This factor dataframe can come from any data source, can be an aggregate of multiple data sources, etc., it just needs</span>
+<span class="s2">to be given to the risk model as one single dataframe.</span>
+
+<span class="s0">#### </span><span class="s2">Return dataframe</span>
+<span class="s2">The return dataframe contains all the return data necessary to build up a return covariance matrix that is used in tandem with the factor dataframe</span>
+<span class="s2">to generate the final model. Specifically, it contains the following columns</span><span class="s1">:</span>
+  <span class="s0">- </span><span class="s2">Return column</span>
+  <span class="s0">- </span><span class="s2">Asset ID column </span><span class="s1">(</span><span class="s2">to use to join this dataframe with the factor dataframe</span><span class="s1">)</span>
+  <span class="s0">- </span><span class="s2">Date column</span>
+
+<span class="s2">The returns dataframe can contain data that precedes the start of the factor dataframe's data, allowing it to build up data</span>
+<span class="s2">so that the return covariance matrix has sufficient data from the very start of the factor data.</span>
+
+<span class="s0">### </span><span class="s2">Outputs</span>
+
+<span class="s2">For each day of data specified in the factor dataframe, a directory is created, labelled with the date, and containing the following items</span><span class="s1">:</span>
+<span class="s0">- </span><span class="s2">Factor-mimicking portfolio weight dataframe</span>
+<span class="s0">- </span><span class="s2">Factor-mimicking portfolio covariance dataframe</span>
+<span class="s0">- </span><span class="s2">Specific risk dataframe</span>
+<span class="s0">- </span><span class="s2">Specific returns dataframe</span>
+<span class="s0">- </span><span class="s2">Returns dataframe</span>
+<span class="s0">- </span><span class="s2">Adjusted exposures dataframe</span>
+
+<span class="s0">### </span><span class="s2">Example</span>
+
+<span class="s2">Suppose we want to generate risk models for the following factor dataframe</span><span class="s1">:</span>
+<span class="s0">```</span><span class="s3">Generic</span>
+<span class="s4">-     date asset_id  momentum_21_day    adv_21_day  TECH  INDUSTRIAL</span>
+<span class="s4">2020-01-02     AAPL         0.099018  1.005026e+08     1           0</span>
+<span class="s4">2020-01-02       GE         0.022469  1.216584e+08     0           1</span>
+<span class="s4">2020-01-03     AAPL         0.038527  1.559063e+08     1           0</span>
+<span class="s4">2020-01-03       GE         0.094212  1.351560e+08     0           1</span>
+<span class="s0">```</span>
+
+<span class="s2">And the following return dataframe</span><span class="s1">:</span>
+<span class="s0">```</span><span class="s3">Generic</span>
+<span class="s4">-     date asset_id    return</span>
+<span class="s4">2020-01-02     AAPL  0.017174</span>
+<span class="s4">2020-01-02       GE  0.038341</span>
+<span class="s4">2020-01-03     AAPL  0.068160</span>
+<span class="s4">2020-01-03       GE  0.080969</span>
+<span class="s0">```</span>
+
+<span class="s2">We then write the factor dataframe to `/path/to/factor_dataframe.parquet`, the return dataframe to `/path/to/return_dataframe.parquet`,</span>
+<span class="s2">and a config file to `/path/to/config.toml` consisting of the following</span><span class="s1">:</span>
+<span class="s0">```</span><span class="s3">Generic</span>
+<span class="s4">data_file_path = &quot;/path/to/factor_dataframe.parquet&quot;</span>
+<span class="s4">return_data_file_path = &quot;/path/to/return_dataframe.parquet&quot;</span>
+<span class="s4">expo_shrink = 0.5</span>
+<span class="s4">output_dir = &quot;/path/to/output_dir&quot;</span>
+<span class="s4">...</span>
+<span class="s0">```</span>
+
+<span class="s2">We then invoke the tool with `/path/to/fm --config_file_path /path/to/config.toml`, and end up with the following files</span><span class="s1">:</span>
+<span class="s0">```</span><span class="s3">Generic</span>
+<span class="s4">- /path/to/output_dir</span>
+  <span class="s4">- /2020-01-02T00:00:00Z</span>
+    <span class="s4">- fmp_portfolio_weights.parquet</span>
+    <span class="s4">- fmp_covariance_matrix.parquet</span>
+    <span class="s4">- ...</span>
+  <span class="s4">- /2021-01-03T00:00:00Z</span>
+    <span class="s4">- fmp_portfolio_weights.parquet</span>
+    <span class="s4">- fmp_covariance_matrix.parquet</span>
+    <span class="s4">- ...</span>
+<span class="s0">```</span>
+
+<span class="s2">As one example, the `fmp_portfolio_weights.parquet` files above will look like this</span><span class="s1">:</span>
+
+<span class="s0">```</span><span class="s3">Generic</span>
+<span class="s4">-     date momentum_21_day  adv_21_day      TECH  INDUSTRIAL</span>
+<span class="s4">2020-01-02        0.076388    0.046388  0.038853    0.008082</span>
+<span class="s4">2020-01-03        0.056049    0.003916  0.098135    0.004257</span>
+<span class="s0">```</span>
+
+<span class="s2">We can see that each date for which we have data gets its own directory with its own dataframes. Although the amount data in this example is quite small,</span>
+<span class="s2">the risk model tool can generate risk models for input data with hundreds of factors, thousands of days, and thousands of assets per day in</span>
+<span class="s2">less than 20 minutes </span><span class="s1">(</span><span class="s2">if not less than 5</span><span class="s1">) </span><span class="s2">depending on the hardware used and the exact size of the data.</span>
+
+<span class="s2">For more information on how to specify parameters for the tool and run it, see </span><span class="s1">&quot;</span><span class="s2">Running the Risk Model Tool</span><span class="s1">&quot;</span><span class="s2">.</span>
+</pre>
+</body>
+</html>

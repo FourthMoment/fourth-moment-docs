@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Api-documentation.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Api-documentation.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">API Documentation</span>
+
+<span class="s0">##### </span><span class="s2">config_file_path</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The path to the .toml configuration file. This is the one required argument that must always be passed as a command-line parameter </span><span class="s1">(</span><span class="s2">`--config_file_path ...`</span><span class="s1">)</span>
+
+<span class="s0">##### </span><span class="s2">data_file_path</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The path to the factor dataframe file</span>
+
+<span class="s0">##### </span><span class="s2">data_file_format</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The format of the factor dataframe file.</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Supported Values</span><span class="s1">**:</span>
+  <span class="s0">- </span><span class="s2">`parquet`</span><span class="s1">: </span><span class="s2">A Parquet file</span>
+  <span class="s0">- </span><span class="s2">`arrow_ipc`</span><span class="s1">: </span><span class="s2">An Arrow IPC </span><span class="s1">(</span><span class="s2">A.K.A. Feather v2</span><span class="s1">) </span><span class="s2">file</span>
+
+<span class="s0">##### </span><span class="s2">return_data_file_path</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The path to the return dataframe file</span>
+
+<span class="s0">##### </span><span class="s2">return_data_file_format</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The format of the return dataframe file.</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Supported Values</span><span class="s1">**:</span>
+  <span class="s0">- </span><span class="s2">`parquet`</span><span class="s1">: </span><span class="s2">A Parquet file</span>
+  <span class="s0">- </span><span class="s2">`arrow_ipc`</span><span class="s1">: </span><span class="s2">An Arrow IPC </span><span class="s1">(</span><span class="s2">A.K.A. Feather v2</span><span class="s1">) </span><span class="s2">file</span>
+
+<span class="s0">##### </span><span class="s2">estimation_universe_column</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The name of the factor dataframe column that contains the estimation universe</span>
+
+<span class="s0">##### </span><span class="s2">expo_shrink</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The expo shrink for the adjusted style exposures</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">Float, e.g. `1.0`</span>
+
+<span class="s0">##### </span><span class="s2">return_column</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The name of the return dataframe column that contains the returns</span>
+
+<span class="s0">##### </span><span class="s2">asset_id_column</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The name of the column, both in the factor dataframe and in the return dataframe, that contains the asset IDs</span>
+
+<span class="s0">##### </span><span class="s2">added_market_factor_column </span><span class="s1">(</span><span class="s2">Optional</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">A market factor column </span><span class="s1">(</span><span class="s2">all 1's</span><span class="s1">) </span><span class="s2">that gets added as a style factor. Clients should not supply their own</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Default if not specified</span><span class="s1">**: </span><span class="s2">No market factor is added</span>
+
+<span class="s0">##### </span><span class="s2">date_column</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The name of the column, both in the factor dataframe and in the return dataframe, that contains the dates. This column must be sorted in ascending order in both dataframes</span>
+
+<span class="s0">##### </span><span class="s2">weight_column</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The name of the factor dataframe column that contains the weights for the factor-mimicking portfolio calculation</span>
+
+<span class="s0">##### </span><span class="s2">factor_columns_industry</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The names of the factor dataframe's industry factor columns</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">String array, e.g. `</span><span class="s1">[&quot;</span><span class="s2">a</span><span class="s1">&quot;</span><span class="s2">, </span><span class="s1">&quot;</span><span class="s2">b</span><span class="s1">&quot;</span><span class="s2">, </span><span class="s1">&quot;</span><span class="s2">c</span><span class="s1">&quot;]</span><span class="s2">`</span>
+
+<span class="s0">##### </span><span class="s2">factor_columns_style</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The names of the factor dataframe's style factor columns</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">String array, e.g. `</span><span class="s1">[&quot;</span><span class="s2">a</span><span class="s1">&quot;</span><span class="s2">, </span><span class="s1">&quot;</span><span class="s2">b</span><span class="s1">&quot;</span><span class="s2">, </span><span class="s1">&quot;</span><span class="s2">c</span><span class="s1">&quot;]</span><span class="s2">`</span>
+
+<span class="s0">##### </span><span class="s2">covariance_halflife</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The covariance matrix's covariance half-life </span><span class="s1">(</span><span class="s2">must be </span><span class="s1">&gt;</span><span class="s2">= 1</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">Integer, e.g. `5`</span>
+
+<span class="s0">##### </span><span class="s2">correlation_halflife</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The covariance matrix's correlation half-life, </span><span class="s1">(</span><span class="s2">must be </span><span class="s1">&gt;</span><span class="s2">= 1</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">Integer, e.g. `5`</span>
+
+<span class="s0">##### </span><span class="s2">window_size </span><span class="s1">(</span><span class="s2">Optional</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The covariance matrix's window size </span><span class="s1">(</span><span class="s2">must be </span><span class="s1">&gt;</span><span class="s2">= 2</span><span class="s1">)</span><span class="s2">. If not specified, defaults to not having any window</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">Integer, e.g. `5`</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Default if not specified</span><span class="s1">**: </span><span class="s2">The window size is infinite, i.e. no data is cut off</span>
+
+<span class="s0">##### </span><span class="s2">min_overlap</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The minimum overlap between two assets to include their covariance in the covariance matrix. If the minimum overlap isn't reached for a pair of assets, their covariance is set to NaN</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">Integer, e.g. `5`</span>
+
+<span class="s0">##### </span><span class="s2">min_obs</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The minimum number of returns an asset must have for any of their covariances to be included in the covariance matrix. If the overlap for an asset, its covariances are set to NaN</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">Integer, e.g. `5`</span>
+
+<span class="s0">##### </span><span class="s2">start_date </span><span class="s1">(</span><span class="s2">Optional</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">A threshold date before which all dates in the factor dataframe are ignored. Does not affect the covariance matrix calculation</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">A date represented as a string </span><span class="s1">(</span><span class="s2">TOML's date type is not supported</span><span class="s1">)</span><span class="s2">. It can either be a RFC 3339 date with a UTC timestamp </span><span class="s1">(</span><span class="s2">e.g. `</span><span class="s1">&quot;</span><span class="s2">2020-01-20T03</span><span class="s1">:</span><span class="s2">05</span><span class="s1">:</span><span class="s2">10Z</span><span class="s1">&quot;</span><span class="s2">`</span><span class="s1">) </span><span class="s2">or a date in the format `YYYY-MM-DD` </span><span class="s1">(</span><span class="s2">e.g. `</span><span class="s1">&quot;</span><span class="s2">2020-01-20</span><span class="s1">&quot;</span><span class="s2">`, which is equivalent to `</span><span class="s1">&quot;</span><span class="s2">2020-0120T00</span><span class="s1">:</span><span class="s2">00</span><span class="s1">:</span><span class="s2">00Z</span><span class="s1">&quot;</span><span class="s2">`</span><span class="s1">)</span><span class="s2">.</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Default if not specified</span><span class="s1">**: </span><span class="s2">The earliest date in the factor dataframe, i.e. no start date cutoff</span>
+
+<span class="s0">##### </span><span class="s2">end_date </span><span class="s1">(</span><span class="s2">Optional</span><span class="s1">)</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">A threshold date after which all dates in the factor dataframe are ignored. Does not affect the covariance matrix calculation</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Type</span><span class="s1">**: </span><span class="s2">A date represented as a string </span><span class="s1">(</span><span class="s2">TOML's date type is not supported</span><span class="s1">)</span><span class="s2">. It can either be a RFC 3339 date with a UTC timestamp </span><span class="s1">(</span><span class="s2">e.g. `</span><span class="s1">&quot;</span><span class="s2">2020-01-20T03</span><span class="s1">:</span><span class="s2">05</span><span class="s1">:</span><span class="s2">10Z</span><span class="s1">&quot;</span><span class="s2">`</span><span class="s1">) </span><span class="s2">or a date in the format `YYYY-MM-DD` </span><span class="s1">(</span><span class="s2">e.g. `</span><span class="s1">&quot;</span><span class="s2">2020-01-20</span><span class="s1">&quot;</span><span class="s2">`, which is equivalent to `</span><span class="s1">&quot;</span><span class="s2">2020-0120T00</span><span class="s1">:</span><span class="s2">00</span><span class="s1">:</span><span class="s2">00Z</span><span class="s1">&quot;</span><span class="s2">`</span><span class="s1">)</span><span class="s2">.</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Default if not specified</span><span class="s1">**: </span><span class="s2">The latest date in the factor dataframe, i.e. no end date cutoff</span>
+
+<span class="s0">##### </span><span class="s2">output_dir</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The directory to which the generated models will be written. This directory must not exist beforehand, as it will be created by the tool</span>
+
+<span class="s0">##### </span><span class="s2">z_normalization_method</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Description</span><span class="s1">**: </span><span class="s2">The Z-Normalization method to be used</span>
+<span class="s0">- </span><span class="s1">**</span><span class="s2">Supported Values</span><span class="s1">**:</span>
+  <span class="s0">- </span><span class="s2">`standard`</span><span class="s1">: </span><span class="s2">Apply standard normalization, z-scoring each piece of data</span>
+  <span class="s0">- </span><span class="s2">`rank`</span><span class="s1">: </span><span class="s2">Apply standard normalization but on the </span><span class="s1">_</span><span class="s2">rank</span><span class="s1">_ </span><span class="s2">of each piece of data </span><span class="s1">(</span><span class="s2">the lowest value gets assigned 1, the second lowest gets assigned 2, etc.</span><span class="s1">)</span>
+  <span class="s0">- </span><span class="s2">`none`</span><span class="s1">: </span><span class="s2">Don't perform any normalization on the data, e.g. because it has already been normalized</span>
+</pre>
+</body>
+</html>

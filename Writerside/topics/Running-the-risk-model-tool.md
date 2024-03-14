@@ -18,6 +18,8 @@ covariance_halflife = 20
 ...
 ```
 
+See [](toml-reference.md) for a complete description of config file values.
+
 If this example configuration file resided at `/path/to/config.toml`, we'd run the whole thing with `/path/to/fm --config_file /path/to/config.toml`.
 
 ### Overriding parameters via command-line arguments
@@ -28,4 +30,4 @@ adding `--expo-shrink 0.75` to the invocation: `/path/to/fm --config_file /path/
 Note that array parameters, such as `factor_columns_industry`, are represented in comma-separated form, e.g.
 `--factor_columns_industry some_factor,other_factor,yet_another_factor`.
 
-For a complete list of the specific arguments that the tool takes as an input, see "API Documentation".
+For a complete list of the specific arguments that the tool takes as an input, see [](CLI-Reference.md)

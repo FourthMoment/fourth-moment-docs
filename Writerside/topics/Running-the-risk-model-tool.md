@@ -20,7 +20,7 @@ covariance_halflife = 20
 
 See [](toml-reference.md) for a complete description of config file values.
 
-If this example configuration file resided at `/path/to/config.toml`, we'd run the whole thing with `/path/to/fm --config_file /path/to/config.toml`.
+If this example configuration file resided at `/path/to/config.toml`, we'd run the whole thing with `/path/to/fm generate --config_file /path/to/config.toml`.
 
 ### Overriding parameters via command-line arguments
 

@@ -1,17 +1,5 @@
 # Config.toml Reference
 
-## bootstrap
-
-<note>
-configuration options for the <code>fm bootstrap</code> subcommand
-</note>
-
-## generate
-
-<note>
-configuration options for the <code>fm generate</code> subcommand
-</note>
-
 ##### config_file_path
 - **Description**: The path to the .toml configuration file. This is the one required argument that must always be passed as a command-line parameter (`--config_file_path ...`)
 

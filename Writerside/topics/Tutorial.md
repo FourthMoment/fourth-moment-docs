@@ -53,7 +53,7 @@ There are a number of parameters we need to specify. This covers things like whi
 be used for the style factors, covariance matrix settings, and more.
 
 Note: although there's a synopsis of each argument in the `# ...` comment preceding it, there's also a more in-depth explanation of all available
-parameters [here](Api-documentation.md).
+parameters [](toml-reference.md).
 
 Configuration file:
 ```Generic
@@ -104,11 +104,14 @@ variance_halflife = 126
 correlation_halflife = 252
 ```
 
-With this configuration file stored at `/path/to/config.toml`, we'll run the whole thing with `/path/to/fm --config_file /path/to/config.toml`.
+With this configuration file stored at `/path/to/config.toml`, we'll run:
+```bash
+/path/to/fm generate --config_file_path /path/to/config.toml
+```
 
 ### Output
 
-We'll then invoke the tool with `/path/to/fm --config_file_path /path/to/config.toml`, and end up with the following files:
+This will generate the following files:
 ```Generic
 - /path/to/output_dir
   - /risk_model_2023-01-03_00-00-00

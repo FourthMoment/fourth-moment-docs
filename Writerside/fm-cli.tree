@@ -7,6 +7,6 @@
                  start-page="Overview.md">
 
     <toc-element topic="Overview.md"/>
-    <toc-element topic="Running-the-risk-model-tool.md"/>
+    <toc-element topic="Tutorial.md"/>
     <toc-element topic="Api-documentation.md"/>
 </instance-profile>

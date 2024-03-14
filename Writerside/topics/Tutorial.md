@@ -5,14 +5,14 @@
 In this section, we'll go through the end-to-end steps of how to use the risk model engine to generate risk
 models for an example dataset.
 The risk model engine is an executable file with a number of configurable parameters. These parameters are
-set in a configuration file (TOML-formatted) whose path is then passed to the executable file.
+set in a configuration file (TOML format) whose path is then passed to the executable file.
 
 ### Input datasets
 
-For our factor exposure dataset, we'll use a Parquet file (one of the two currently supported formats)
+For our factor exposure dataset, we'll use a Parquet file 
 of data for 25 large-cap tech stocks and 25 large-cap industrial stocks for the year 2023. There are two
 Z-scored style factors and two industry factors. We'll include everything in the
-estimation universe by setting the column to all 1's. We'll use the inverse square root of the market cap
+estimation universe by setting the `est_univ` column to all 1's. We'll use the inverse square root of the market cap
 as the GLS regression weight column. Here's a sample of it:
 
 ```Generic
@@ -44,39 +44,51 @@ For our return dataset, we'll have another Parquet file, this time with return d
 
 [Download full dataframe](https://fm-public-files.s3.amazonaws.com/return_data.parquet)
 
-Note: although the datasets are small in this tutorial for the sake of simplicity, the risk model generator can handle huge datasets very efficiently.
-For example, it can output the risk models for a 5,000 day, 5,000 asset, 100 factor exposure dataset (25,000,000 rows)
-in under 20 minutes, if not under 5 (depending on the user's machine).
+Note: although the datasets are small in this tutorial for the sake of simplicity, the risk model generator can handle
+huge real-world datasets very efficiently.
 
 ### Setting up the configuration file
 
-For our run, we'll use a simple setup with two industry factors and two style factors.
-There are also a number of other parameters we need that we'll set to reasonable values.
+There are a number of parameters we need to specify. This covers things like which columns in the dataframe should
+be used for the style factors, covariance matrix settings, and more.
 
-
-Note: although there's a synopsis of each argument in the `# ...` comment following it, there's also a more in-depth explanation of all available
+Note: although there's a synopsis of each argument in the `# ...` comment preceding it, there's also a more in-depth explanation of all available
 parameters [here](Api-documentation.md).
 
 Configuration file:
 ```Generic
-output_dir = "/path/to/risk_models" # Where to put the output risk models
-style_factor_column_names = ["earnings_yield_12m", "momentum_12m"] # Style factors in the dataframe
-industry_factor_column_names = ["INDUSTRIALS", "TECHNOLOGY"] # Industry factor columns in the dataframe
-asset_id_column_name = "asset_id" # Name of the each asset's unique ID
-date_column_name = "date" # Date column in the factor dataframe. Data must be sorted by date
-return_column_name = "return" # Return column in the return dataframe.
+# Where to put the output risk models
+output_dir = "/path/to/risk_models"
+# Style factors in the dataframe
+style_factor_column_names = ["earnings_yield_12m", "momentum_12m"]
+# Industry factor columns in the dataframe
+industry_factor_column_names = ["INDUSTRIALS", "TECHNOLOGY"]
+# Name of the each asset's unique ID
+asset_id_column_name = "asset_id"
+# Date column in the factor dataframe. Data must be sorted by date
+date_column_name = "date"
+# Return column in the return dataframe.
+return_column_name = "return"
 # Weight column for values used for the FMP calculation. The lower this value for a stock, the larger its impact on the FMPs.
 gls_regression_weight_column_name = "market_cap_inv_sqrt" 
-estimation_universe_column = "est_univ" # Estimation universe column in the factor
-exposure_shrinkage = 0.5 # Exposure shrinkage for adjusted style factors
+# Estimation universe column in the factor
+estimation_universe_column = "est_univ"
+# Exposure shrinkage for adjusted style factors
+exposure_shrinkage = 0.5
+# Path to the factor exposure dataset, in the form of a dataframe file
 data_file_path = "/path/to/data.parquet"
-data_file_format = "parquet" # Data file format
-return_data_file_path = "/path/to/return_data.parquet" # Path to the return data file
-return_data_file_format = "parquet" # Return data file format
-start_date = "2022-01-01" # (Optional) Cutoff date before which no risk models will be generated, even if data is present for them
-end_date = "2022-12-31" # (Optional) Cutoff date after which no risk models will be generated, even if data is present for them
-added_market_factor_column = "market" # (Optional) an added market factor column (all 1's)
-z_normalization_method = "standard" # Type of z-normalization to be applied to the style factors
+# Data file format
+data_file_format = "parquet"
+# Path to the return data file
+return_data_file_path = "/path/to/return_data.parquet"
+# Return data file format
+return_data_file_format = "parquet" 
+# (Optional) Cutoff date before which no risk models will be generated, even if data is present for them
+start_date = "2022-01-01"
+# (Optional) Cutoff date after which no risk models will be generated, even if data is present for them
+end_date = "2022-12-31"
+# Type of z-normalization to be applied to the style factors
+z_normalization_method = "standard"
 
 # Covariance matrix parameters
 

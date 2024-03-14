@@ -92,11 +92,16 @@ z_normalization_method = "standard"
 
 # Covariance matrix parameters
 
-min_overlap = 20 # Minimum number of dates that two assets' returns must both have overlapping return data before the covariance for that pair is included in the covariance matrix
-min_obs = 252 # Minimum number of dates that an asset must have return data before its included for as part of any pairs in the covariance matrix
-window_size = 1260 # Maximum number of dates to include return data for when computing a date's covariance matrix
-variance_halflife = 126 # Variance halflife for the covariance matrix
-correlation_halflife = 252 # Variance halflife for the correlation matrix
+# Minimum number of dates that two assets' returns must both have overlapping return data before the covariance for that pair is included in the covariance matrix
+min_overlap = 20
+# Minimum number of dates that an asset must have return data before its included for as part of any pairs in the covariance matrix
+min_obs = 252
+# Maximum number of dates to include return data for when computing a date's covariance matrix
+window_size = 1260
+# Variance halflife for the covariance matrix
+variance_halflife = 126
+# Variance halflife for the correlation matrix
+correlation_halflife = 252
 ```
 
 With this configuration file stored at `/path/to/config.toml`, we'll run the whole thing with `/path/to/fm --config_file /path/to/config.toml`.

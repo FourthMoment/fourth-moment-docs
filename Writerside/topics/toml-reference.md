@@ -1,4 +1,4 @@
-# API Documentation
+# Config.toml Reference
 
 In this section, all of the available parameters and their descriptions are listed.
 

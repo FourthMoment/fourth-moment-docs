@@ -71,11 +71,15 @@ Generate a risk model using the specified `config.toml` file as well as any over
 * `--output_dir <OUTPUT_DIR>` — The directory to which the generated models will be written. This directory must not exist beforehand, as it will be created by the tool. Type: `string`
 * `--z_normalization_method <Z_NORMALIZATION_METHOD>` — The Z-Normalization method to be used. Type: `string`
 
-  Possible values: `rank`, `standard`, `none`
+  Possible values: `rank`, `standard_winsorized`, `standard_truncated`, `none`
 
 * `--warn_only <WARN_ONLY>` — Treat errors as warnings for the specified issues detected during model generation. Type: `string-array`
 
-  Possible values: `covmat_asset_dropped`, `factor_scalar_nan`, `factor_scalar_inf`, `matrix_singular`
+  Possible values: `covmat_asset_dropped`, `factor_scalar_nan`, `factor_scalar_inf`, `matrix_singular`, `invalid_data_for_date`, `generation_failed_for_date`
+
+* `--single_thread` — Run the program in single-threaded mode
+
+  Possible values: `true`, `false`
 
 
 
